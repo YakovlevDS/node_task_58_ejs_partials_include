@@ -1,12 +1,21 @@
-let nodePath = process.argv[0];
-let appPath = process.argv[1];
-let name = process.argv[2];
-let age = process.argv[3];
+// Для работы с моделью представления используются выражения javascript, которые определяются с помощью тега <% выражение %>.
+const express = require("express");
+const app = express();
+ 
+app.set("view engine", "ejs");
+app.use("/contact", (req, res)=>{
+     
+    res.render("contact", {
+        title: "Мои контакты",
+        emailsVisible: true,
+        emails: ["gavgav@mycorp.com", "mioaw@mycorp.com"],
+        phone: "+1234567890"
+    });
+});
+app.use("/", (req, res)=>{
+     
+    res.send("Главная страница");
+});
+app.listen(3000);
 
-console.log("nodePath: " + nodePath);
-console.log("appPath: " + appPath);
-console.log();
-console.log("name: " + name);
-console.log("age: " + age);
-
-// node app.js Tom 23
+// EJS позволяет вставлять код одних представлений в другие с помощью функции include.
